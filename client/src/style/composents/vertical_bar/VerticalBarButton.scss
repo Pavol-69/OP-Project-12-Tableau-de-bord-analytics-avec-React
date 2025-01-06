@@ -1,0 +1,12 @@
+@use "../../variables.scss" as *;
+
+.ver_bar_btn {
+  /*Dimensions*/
+  height: 64px;
+  width: 64px;
+
+  /*Style*/
+  background-color: $wht;
+  border-radius: 6px;
+  cursor: pointer;
+}

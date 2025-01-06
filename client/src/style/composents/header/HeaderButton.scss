@@ -1,0 +1,20 @@
+@use "../../variables.scss" as *;
+
+.hd_btn {
+  /*Dimensions*/
+  height: 100%;
+
+  /*Style*/
+  background-color: $blk;
+  color: $wht;
+  border: 0px;
+  cursor: pointer;
+
+  /*Texte*/
+  font-size: 24px;
+}
+
+.hd_btn:hover {
+  /*Style*/
+  text-decoration: underline;
+}

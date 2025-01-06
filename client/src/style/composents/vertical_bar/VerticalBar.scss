@@ -1,0 +1,39 @@
+@use "../../variables.scss" as *;
+
+.ver_bar {
+  /*Position*/
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+
+  /*Dimensions*/
+  width: 117px;
+
+  /*Style*/
+  background-color: $blk;
+
+  /*Display*/
+  gap: 20px;
+}
+
+.copyright {
+  /*Position*/
+  transform: rotate(270deg);
+  transform-origin: 0% 100%;
+  position: absolute;
+  bottom: 46px;
+  left: 71px;
+
+  /*Dimensions*/
+  height: 25px;
+  width: 150px;
+
+  /*Display*/
+  justify-content: start;
+
+  /*Texte*/
+  color: $wht;
+  font-size: 12px;
+  font-weight: 500;
+}
