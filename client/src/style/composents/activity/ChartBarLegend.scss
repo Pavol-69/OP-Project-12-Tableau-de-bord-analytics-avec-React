@@ -1,0 +1,23 @@
+@use "../../variables.scss" as *;
+
+.legend_ctn {
+  /*Display*/
+  display: flex;
+  gap: 10px;
+}
+
+.legend_ctn span {
+  /*Texte*/
+  font-size: 14px;
+  font-weight: 500;
+  color: $drk-gry;
+}
+
+.pastille_lgd {
+  /*Dimensions*/
+  height: 8px;
+  width: 8px;
+
+  /*Style*/
+  border-radius: 50%;
+}

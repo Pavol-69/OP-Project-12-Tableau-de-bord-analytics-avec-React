@@ -1,0 +1,58 @@
+@use "../../variables.scss" as *;
+
+.chart_bar_ctn {
+  /*Dimensions*/
+  max-width: 835px;
+  height: 320px;
+  padding: 30px;
+  box-sizing: border-box;
+
+  /*Display*/
+  display: flex;
+  justify-content: space-between;
+
+  /*Style*/
+  background-color: $lgt-gry;
+}
+
+.chart_bar_ctn_title {
+  /*Texte*/
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.chart_bar_header,
+.legend_bar_chart_ctn {
+  /*Display*/
+  display: flex;
+  justify-content: space-between;
+}
+
+.legend_bar_chart_ctn {
+  /*Display*/
+  gap: 20px;
+}
+
+.recharts-wrapper .recharts-cartesian-grid-horizontal line:first-child {
+  stroke-opacity: 0;
+}
+
+.recharts-cartesian-axis-ticks:last-child text {
+  y: -9.5px;
+}
+
+.custom-tooltip {
+  /*Dimensions*/
+  padding: 5px 10px;
+
+  /*Display*/
+  gap: 10px;
+
+  /*Style*/
+  background-color: $prm;
+
+  /*Texte*/
+  font-size: 7px;
+  font-weight: 500;
+  color: $wht;
+}

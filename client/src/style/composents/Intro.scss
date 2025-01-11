@@ -1,0 +1,18 @@
+@use "../variables.scss" as *;
+
+.intro_ctn {
+  /*Display*/
+  display: flex;
+  gap: 20px;
+}
+
+.intro_ctn h1 span {
+  /*Texte*/
+  color: $red;
+}
+
+.intro_msg {
+  /*Texte*/
+  font-size: 18px;
+  font-weight: 400;
+}

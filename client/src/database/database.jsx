@@ -2,7 +2,7 @@ import axios from "axios";
 
 const jsonOrThrowIfError = async (response) => {
   if (!response.data) throw new Error(await response.message);
-  return response;
+  return response.data;
 };
 
 class Api {

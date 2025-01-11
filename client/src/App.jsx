@@ -5,22 +5,29 @@ import "./style/App.scss";
 // Components
 import Header from "./composents/header/Header";
 import VerticalBar from "./composents/vertical_bar/VerticalBar";
+import Intro from "./composents/Intro";
+import Activity from "./composents/activity/Activity";
 
-// Database
-import database from "./database/database";
+// Autre
+import { useState, useEffect } from "react";
 
 function App() {
-  console.log(
-    database
-      .user(12)
-      .info()
-      .then((toto) => console.log(toto.data.data))
-  );
+  const [userId, setUserId] = useState("");
+  useEffect(() => {
+    setUserId("12");
+  }, []);
   return (
     <>
-      <VerticalBar />
-      <Header />
-      <div className="main_ctn"></div>
+      {userId != "" ? (
+        <>
+          <VerticalBar />
+          <Header />
+          <div className="main_ctn">
+            <Intro userId={userId} />
+            <Activity userId={userId} />
+          </div>
+        </>
+      ) : null}
     </>
   );
 }
