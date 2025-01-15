@@ -1,46 +1,44 @@
 // Style
 import "../../style/generalCSS.scss";
+import "../../style/composents/activity/Activity.scss";
 import "../../style/composents/activity/CircularProgressBar.scss";
 
 // Autre
-import { useState } from "react";
-import * as d3 from "d3";
+import { PieChart, Pie, Cell } from "recharts";
 
-function CircularProgressBar() {
-  const svgWidth = 150;
-  const arcWidth = 12;
-  const [progressPercentage] = useState(60);
-  const colorIndicator = "red";
-  const svgHeight = svgWidth;
-  const arcOuterRadius = svgWidth / 2;
-  const arcInnerRadius = svgWidth / 2 - arcWidth;
-  const arcGenerator = d3
-    .arc()
-    .innerRadius(arcInnerRadius)
-    .outerRadius(arcOuterRadius)
-    .startAngle(0)
-    .cornerRadius(5);
-  const progressArc = (value) =>
-    arcGenerator({
-      endAngle: 2 * Math.PI * value,
-    });
+function CircularProgressBar({ todayScore }) {
+  const data = [
+    { name: "Group B", value: todayScore },
+    { name: "Group A", value: 100 - todayScore },
+  ];
+
+  const COLORS = ["#FF0000", "#FBFBFB"];
 
   return (
-    <div>
-      <svg height={svgHeight} width={svgWidth}>
-        <g transform={`translate(${svgWidth / 2}, ${svgHeight / 2})`}>
-          <path d={progressArc(1)} opacity="0.2" fill="gray" />
-        </g>
-        <g transform={`translate(${svgWidth / 2}, ${svgHeight / 2})`}>
-          <path
-            d={progressArc(progressPercentage / 100)}
-            fill={colorIndicator}
-          />
-          <text x="-10" y="5">
-            {`${progressPercentage}%`}
-          </text>
-        </g>
-      </svg>
+    <div className="info_ctn circular_progress_bar_ctn elm_ct">
+      <PieChart
+        width={194}
+        height={194}
+        style={{ transform: "rotate(-90deg)" }}
+      >
+        <circle cx="50%" cy="50%" r="87" fill="white" />
+        <Pie
+          data={data}
+          innerRadius={87}
+          outerRadius={97}
+          cornerRadius={40}
+          dataKey="value"
+          stroke=""
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+      </PieChart>
+      <div className="cir_txt_ctn ver">
+        <span>{`${todayScore}%`}</span>
+        <p>de votre objectif</p>
+      </div>
     </div>
   );
 }

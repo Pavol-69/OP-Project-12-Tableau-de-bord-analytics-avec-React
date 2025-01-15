@@ -10,6 +10,7 @@ import Activity from "./composents/activity/Activity";
 
 // Autre
 import { useState, useEffect } from "react";
+import Alimentation from "./composents/Alimentation/Alimentation";
 
 function App() {
   const [userId, setUserId] = useState("");
@@ -22,9 +23,12 @@ function App() {
         <>
           <VerticalBar />
           <Header />
-          <div className="main_ctn">
+          <div className="main_ctn ver">
             <Intro userId={userId} />
-            <Activity userId={userId} />
+            <div className="act_alm_ctn">
+              <Activity userId={userId} />
+              <Alimentation userId={userId} />
+            </div>
           </div>
         </>
       ) : null}

@@ -1,219 +1,88 @@
 // Style
 import "../../style/generalCSS.scss";
+import "../../style/composents/activity/Activity.scss";
 import "../../style/composents/activity/ChartSpider.scss";
 
 // Autre
-import { useEffect, useRef, useState } from "react";
-import * as d3 from "d3";
+import { useEffect, useState } from "react";
+import {
+  ResponsiveContainer,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  Radar,
+  Text,
+} from "recharts";
 
-function ChartLine() {
-  const containerRef = useRef(null);
-  const [margin] = useState({ top: 20, right: 10, bottom: 60, left: 10 });
-  const [width] = useState(760 - margin.left - margin.right);
-  const [height] = useState(450 - margin.top - margin.bottom);
-
-  const [data] = useState([
-    {
-      pace: 0.85,
-      shooting: 0.92,
-      passing: 0.91,
-      dribbling: 0.95,
-      physical: 0.65,
-    },
-    {
-      pace: 0.89,
-      shooting: 0.93,
-      passing: 0.81,
-      dribbling: 0.89,
-      physical: 0.77,
-    },
-  ]);
-
-  const capitalize = (str) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
+function ChartLine({ data }) {
+  const [value, setValue] = useState({});
 
   useEffect(() => {
-    var svg = d3
-      .select(containerRef.current)
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-      .attr("fill", "gray");
+    setValue(reverse(data.data));
+  }, [data]);
 
-    const attributes = Object.keys(data[0]);
+  function toFrench(word) {
+    if (word == "cardio") {
+      return "Cardio";
+    } else if (word == "energy") {
+      return "Energie";
+    } else if (word == "endurance") {
+      return "Endurance";
+    } else if (word == "strength") {
+      return "Force";
+    } else if (word == "speed") {
+      return "Vitesse";
+    } else if (word == "intensity") {
+      return "Intensité";
+    }
+  }
 
-    const radius = 200;
-    const ticks = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
+  function reverse(array) {
+    let newArray = [];
 
-    //radial scale
-    const radAxis = d3.scaleLinear().domain([0.1, 1.0]).range([0, radius]);
-
-    const cordForAngle = (angle, len) => {
-      let x = Math.cos(angle) * len;
-      let y = Math.sin(angle) * len;
-
-      return { x: x, y: y };
-    };
-
-    for (var i = 0; i < attributes.length; i++) {
-      const slice = Math.PI / 2 + (2 * Math.PI * i) / attributes.length;
-      const key = attributes[i];
-
-      //axis values
-      const { x, y } = cordForAngle(slice, radius);
-
-      svg
-        .append("line")
-        .attr("x2", x + width / 2)
-        .attr("y2", y + height / 2)
-        .attr("x1", width / 2)
-        .attr("y1", height / 2)
-        .attr("stroke", "black")
-        .attr("stroke-width", 1.5)
-        .style("opacity", "0.1");
-
-      svg
-        .append("text")
-        .attr("x", x + width / 2)
-        .attr("y", y + height / 2)
-        .text(capitalize(key))
-        .style("text-anchor", () =>
-          i === 0
-            ? "end"
-            : i === 1
-            ? "end"
-            : i === 2
-            ? "end"
-            : i === 2
-            ? "end"
-            : null
-        )
-        .attr("dx", () =>
-          i === 0
-            ? "0.7em"
-            : i === 1
-            ? "-0.7em"
-            : i === 2
-            ? "-0.5em"
-            : i === 3
-            ? "0.3em"
-            : "0.6em"
-        )
-        .attr("dy", () =>
-          i === 0
-            ? "1.3em"
-            : i === 1
-            ? "0.4em"
-            : i === 2
-            ? "-0.5em"
-            : i === 3
-            ? "-0.5em"
-            : "0.4em"
-        )
-        .attr("fill", "black");
+    for (let i = 0; i < array.length; i++) {
+      newArray.push(array[array.length - 1 - i]);
     }
 
-    //circle labels
-    ticks.forEach((el) => {
-      svg
-        .append("text")
-        .attr("x", width / 2)
-        .attr("y", height / 2 - radAxis(el) - 0.85)
-        .text(el)
-        .attr("fill", "black")
-        .attr("stroke", "none")
-        .attr("opacity", "0.5")
-        .style("text-anchor", "middle")
-        .style("font-size", "0.825rem");
-    });
+    return newArray;
+  }
 
-    //circes levels
-    ticks.forEach((el) => {
-      svg
-        .append("circle")
-        .attr("cx", width / 2)
-        .attr("cy", height / 2)
-        .attr("fill", "none")
-        .attr("stroke", "gray")
-        .attr("stroke-width", 1.0)
-        .attr("r", radAxis(el));
-    });
+  function renderPolarAngleAxis({ payload, x, y, cx, cy, ...rest }) {
+    return (
+      <Text
+        {...rest}
+        verticalAnchor="middle"
+        y={y + (y - cy) / 20}
+        x={x + (x - cx) / 20}
+      >
+        {payload.value}
+      </Text>
+    );
+  }
 
-    //line generator
-    let lineGen = d3
-      .line()
-      .x((d) => d.x)
-      .y((d) => d.y);
-
-    //converting data point to coordinates
-    const getCoordPath = (dataPoint) => {
-      let coord = [];
-      for (let i = 0; i < attributes.length; i++) {
-        let attr = attributes[i];
-        let angle = Math.PI / 2 + (2 * Math.PI * i) / attributes.length;
-        coord.push(cordForAngle(angle, radAxis(dataPoint[attr])));
-      }
-      return coord;
-    };
-
-    //drawing path
-    for (let i = 0; i < data.length; i++) {
-      let d = data[i];
-      const cord = getCoordPath(d);
-
-      //spider chart
-      svg
-        .append("path")
-        .datum(cord)
-        .attr("class", "areapath")
-        .attr("d", lineGen)
-        .attr("stroke-width", 1.5)
-        .attr("stroke", "none")
-        .attr("fill", () => (i === 0 ? "#FFC4DD" : "#B4FF9F"))
-        .attr("opacity", 0.1)
-        .attr("transform", `translate(${width / 2}, ${height / 2})`);
-
-      //legends
-      svg
-        .append("circle")
-        .attr("cx", width / 2 + 250)
-        .attr("cy", height / 2 + 150)
-        .attr("r", 10)
-        .style("fill", "#FFC4DD")
-        .style("opacity", "0.5");
-
-      svg
-        .append("circle")
-        .attr("cx", width / 2 + 250)
-        .attr("cy", height / 2 + 180)
-        .attr("r", 10)
-        .style("fill", "#B4FF9F")
-        .style("opacity", "0.7");
-
-      svg
-        .append("text")
-        .attr("y", height / 2 + 150)
-        .attr("x", width / 2 + 280)
-        .html("Messi")
-        .style("stroke", "none")
-        .style("fill", "black");
-
-      svg
-        .append("text")
-        .attr("y", height / 2 + 185)
-        .attr("x", width / 2 + 280)
-        .html("Cristiano")
-        .style("stroke", "none")
-        .style("fill", "black");
-    }
-  }, [data, height, margin, width]);
-
-  return (
-    <div className="chart_spider_ctn">
-      <svg viewBox={`0 0 ${width} ${height}`} ref={containerRef}></svg>
+  return value.length > 0 ? (
+    <div className="info_ctn chart_spider_ctn">
+      <ResponsiveContainer width={"100%"} height={"100%"}>
+        <RadarChart
+          outerRadius="80%"
+          data={value}
+          margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+        >
+          <PolarGrid stroke="#FFFFFF" gridType="polygon" radialLines={false} />
+          <PolarAngleAxis
+            dataKey={(val) => {
+              return toFrench(data.kind[val.kind]);
+            }}
+            stroke="#FFFFFF"
+            tickLine={false}
+            tick={(props) => renderPolarAngleAxis(props)}
+          />
+          <Radar dataKey={"value"} fill="red" fillOpacity={0.7} />
+        </RadarChart>
+      </ResponsiveContainer>
     </div>
+  ) : (
+    <></>
   );
 }
 

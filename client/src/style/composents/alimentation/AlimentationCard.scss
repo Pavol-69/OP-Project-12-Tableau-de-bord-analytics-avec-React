@@ -1,0 +1,70 @@
+@use "../../variables.scss" as *;
+
+.alim_card {
+  /*Dimensions*/
+  height: 124px;
+  width: 258px;
+  padding: 32px;
+  box-sizing: border-box;
+
+  /*Style*/
+  background-color: $lgt_gry;
+  border-radius: 5px;
+
+  /*Display*/
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.img_alim_card_ctn {
+  /*Position*/
+  position: relative;
+
+  /*Dimensions*/
+  height: 60px;
+  width: 60px;
+
+  /*Style*/
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.img_alim_card_bg {
+  /*Position*/
+  position: absolute;
+
+  /*Dimensions*/
+  height: 100%;
+  width: 100%;
+}
+
+.alim_card_txt_ctn {
+  /*Display*/
+  display: flex;
+}
+
+.alim_card_txt_ctn span,
+.alim_card_txt_ctn p {
+  /*Dimensions*/
+  height: 24px;
+  width: 100%;
+
+  /*Display*/
+  display: flex;
+  align-items: center;
+}
+
+.alim_card_txt_ctn span {
+  /*Texte*/
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(40, 45, 48, 1);
+}
+
+.alim_card_txt_ctn p {
+  /*Texte*/
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(116, 121, 140, 1);
+}

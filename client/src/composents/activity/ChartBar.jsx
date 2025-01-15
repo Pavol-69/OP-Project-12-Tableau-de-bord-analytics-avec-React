@@ -6,22 +6,17 @@ import "../../style/composents/activity/ChartBar.scss";
 import ChartBarLegend from "./ChartBarLegend";
 
 // Autre
-import React, { PureComponent } from "react";
 import {
   BarChart,
   Bar,
-  Rectangle,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 
 function ChartBar({ data }) {
-  console.log(data);
-
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
@@ -64,17 +59,7 @@ function ChartBar({ data }) {
             stroke="#DEDEDE"
           />
           <XAxis
-            dataKey={(val) => {
-              let n = 0;
-              for (let i = 0; i < data.length; i++) {
-                if (val.day == data[i].day) {
-                  n = i + 1;
-                  break;
-                }
-              }
-
-              return n;
-            }}
+            dataKey={(val) => new Date(`${val.day}`).getDate()}
             tickLine={false}
             axisLine={{ stroke: "#DEDEDE" }}
             tick={{

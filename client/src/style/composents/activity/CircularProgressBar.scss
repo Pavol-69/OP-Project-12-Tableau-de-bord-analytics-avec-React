@@ -1,1 +1,36 @@
 @use "../../variables.scss" as *;
+
+.circular_progress_bar_ctn {
+  /*Style*/
+  background-color: $lgt_gry;
+}
+
+.cir_txt_ctn {
+  /*Position*/
+  position: absolute;
+
+  /*Dimensions*/
+  width: 95px;
+  height: 56px;
+
+  /*Texte*/
+  color: $drk_gry;
+  font-size: 16px;
+  font-weight: 500;
+
+  /*Display*/
+  display: flex;
+  align-items: center;
+}
+
+.cir_txt_ctn span {
+  /*Texte*/
+  color: $blk;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.cir_txt_ctn p {
+  /*Display*/
+  text-align: center;
+}

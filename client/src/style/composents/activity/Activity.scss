@@ -1,1 +1,29 @@
 @use "../../variables.scss" as *;
+
+.act_ctn {
+  /*Dimensions*/
+  max-width: 835px;
+
+  /*Display*/
+  gap: 30px;
+}
+
+.act_sub_ctn {
+  /*Dimensions*/
+  width: 100%;
+
+  /*Display*/
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.info_ctn {
+  /*Dimensions*/
+  height: 263px;
+  width: 258px;
+
+  /*Style*/
+  border-radius: 5px;
+  overflow: hidden;
+}
