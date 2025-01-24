@@ -3,7 +3,6 @@ import "../../style/generalCSS.scss";
 import "../../style/composents/alimentation/AlimentationCard.scss";
 
 function AlimentationCard({ icon, color, qty, unit, type, opacity }) {
-  console.log(qty);
   return (
     <div className="alim_card">
       <div className="img_alim_card_ctn elm_ct">

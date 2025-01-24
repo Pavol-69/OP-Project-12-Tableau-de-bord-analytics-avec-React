@@ -1,5 +1,54 @@
 @use "../../variables.scss" as *;
 
 .chart_line_ctn {
-  background-color: rgb(208, 255, 208);
+  /*Positionn*/
+  position: relative;
+  background-color: $red;
+}
+
+.bg_wk {
+  /*Position*/
+  position: absolute;
+  right: 0px;
+
+  /*Dimensions*/
+  height: 100%;
+
+  background-color: $prm;
+}
+
+.chart_line_title {
+  /*Position*/
+  position: absolute;
+  top: 29px;
+  left: 34px;
+
+  /*Dimensions*/
+  width: 148px;
+  height: 48px;
+
+  /*Texte*/
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+  color: $wht;
+  opacity: 0.5;
+
+  /*Display*/
+  display: flex;
+  align-items: center;
+}
+
+.custom_line {
+  /*Dimensions*/
+  height: 25px;
+  width: 39px;
+
+  /*Texte*/
+  color: $blk;
+  font-size: 8px;
+  font-weight: 500;
+
+  /*Style*/
+  background-color: $wht;
 }

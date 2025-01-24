@@ -1,6 +1,9 @@
 @use "../variables.scss" as *;
 
 .intro_ctn {
+  /*Dimensions*/
+  width: 100%;
+
   /*Display*/
   display: flex;
   gap: 20px;
