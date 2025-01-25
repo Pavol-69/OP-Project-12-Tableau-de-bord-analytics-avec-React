@@ -52,3 +52,11 @@
   /*Style*/
   background-color: $wht;
 }
+
+@media (max-width: $small-size) {
+  .chart_line_ctn {
+    /*Display*/
+    grid-column: 1/3;
+    grid-row: 1;
+  }
+}

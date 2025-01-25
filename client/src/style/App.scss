@@ -3,6 +3,7 @@
   position: relative;
 
   /*Dimensions*/
+
   margin: 91px 0px 0px 117px;
   padding: 50px 100px;
   box-sizing: border-box;
@@ -10,14 +11,4 @@
   /*Display*/
   display: flex;
   gap: 80px;
-}
-
-.act_alm_ctn {
-  /*Position*/
-  position: relative;
-
-  /*Display*/
-  display: flex;
-  gap: 50px;
-  flex-wrap: wrap;
 }

@@ -8,6 +8,8 @@
   box-sizing: border-box;
 
   /*Display*/
+  grid-column: 1;
+  grid-row: 1;
   display: flex;
   justify-content: space-between;
 
@@ -55,4 +57,12 @@
   font-size: 7px;
   font-weight: 500;
   color: $wht;
+}
+
+@media (max-width: $small-size) {
+  .chart_bar_ctn {
+    /*Display*/
+    grid-column: 1/3;
+    grid-row: 1;
+  }
 }

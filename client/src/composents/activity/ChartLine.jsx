@@ -1,6 +1,6 @@
 // Style
 import "../../style/generalCSS.scss";
-import "../../style/composents/activity/Activity.scss";
+import "../../style/composents/Main.scss";
 import "../../style/composents/activity/ChartLine.scss";
 
 // Autre

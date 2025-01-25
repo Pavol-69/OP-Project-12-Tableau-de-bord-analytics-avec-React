@@ -1,20 +1,21 @@
 // Style
-import "../../style/generalCSS.scss";
-import "../../style/composents/activity/Activity.scss";
+import "../style/generalCSS.scss";
+import "../style/composents/Main.scss";
 
 // Database
-import database from "../../database/database";
+import database from "../database/database";
 
 // Components
-import ChartBar from "./ChartBar";
-import ChartLine from "./ChartLine";
-import ChartSpider from "./ChartSpider";
-import CircularProgressBar from "./CircularProgressBar";
+import ChartBar from "./activity/ChartBar";
+import ChartLine from "./activity/ChartLine";
+import ChartSpider from "./activity/ChartSpider";
+import CircularProgressBar from "./activity/CircularProgressBar";
+import Alimentation from "./alimentation/Alimentation";
 
 // Autre
 import { useState, useEffect } from "react";
 
-function Activity({ userId }) {
+function Main({ userId }) {
   const [activity, setActivity] = useState({});
   const [averageSession, setAverageSession] = useState({});
   const [perf, setPerf] = useState({});
@@ -54,17 +55,18 @@ function Activity({ userId }) {
   }, [userId]);
 
   return activity.userId && averageSession.userId && perf.userId ? (
-    <div className="act_ctn elm_ct ver">
+    <div className="act_ctn">
       <ChartBar data={activity.sessions} />
       <div className="act_sub_ctn elm_ct hor">
         <ChartLine data={averageSession.sessions} />
         <ChartSpider data={perf} />
         <CircularProgressBar todayScore={todayScore} />
       </div>
+      <Alimentation userId={userId} />
     </div>
   ) : (
     <></>
   );
 }
 
-export default Activity;
+export default Main;
