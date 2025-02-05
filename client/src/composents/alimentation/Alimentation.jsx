@@ -24,7 +24,7 @@ function Alimentation({ userId }) {
     database
       .user(userId)
       .info()
-      .then((res) => setInfo(res.data));
+      .then((res) => setInfo(res));
   }, [userId]);
 
   return info.id ? (

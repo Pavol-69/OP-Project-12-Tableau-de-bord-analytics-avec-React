@@ -12,8 +12,15 @@
 
   /*Style*/
   background-color: $blk;
+}
+
+.ver_btn_ctn {
+  /*Position*/
+  position: absolute;
+  top: 347px;
 
   /*Display*/
+  display: flex;
   gap: 20px;
 }
 

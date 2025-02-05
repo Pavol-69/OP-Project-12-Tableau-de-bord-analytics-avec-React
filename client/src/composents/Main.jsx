@@ -26,28 +26,29 @@ function Main({ userId }) {
       .user(userId)
       .activity()
       .then((res) => {
-        setActivity(res.data);
+        console.log(res);
+        setActivity(res);
       });
     database
       .user(userId)
       .averageSession()
       .then((res) => {
-        setAverageSession(res.data);
+        setAverageSession(res);
       });
     database
       .user(userId)
       .performance()
       .then((res) => {
-        setPerf(res.data);
+        setPerf(res);
       });
     database
       .user(userId)
       .info()
       .then((res) => {
-        if (res.data.todayScore) {
-          setTodayScore(res.data.todayScore * 100);
-        } else if (res.data.score) {
-          setTodayScore(res.data.score * 100);
+        if (res.todayScore) {
+          setTodayScore(res.todayScore * 100);
+        } else if (res.score) {
+          setTodayScore(res.score * 100);
         } else {
           setTodayScore(0);
         }

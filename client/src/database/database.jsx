@@ -1,16 +1,50 @@
 import axios from "axios";
+import {
+  USER_MAIN_DATA,
+  USER_ACTIVITY,
+  USER_AVERAGE_SESSIONS,
+  USER_PERFORMANCE,
+} from "./mock.js";
 
 const jsonOrThrowIfError = async (response) => {
   if (!response.data) throw new Error(await response.message);
-  return response.data;
+  return response.data.data;
 };
 
+function contain(url, elm) {
+  return url.indexOf(elm) > -1;
+}
+
+function elementWithRightId(id, array) {
+  return array.filter((elm) =>
+    elm.userId ? elm.userId == id : elm.id == id
+  )[0];
+}
+
 class Api {
-  constructor({ baseUrl }) {
+  constructor({ baseUrl, isMock }) {
     this.baseUrl = baseUrl;
+    this.isMock = isMock;
   }
   async get({ url }) {
-    return jsonOrThrowIfError(await axios.get(`${this.baseUrl}${url}`));
+    if (this.isMock) {
+      try {
+        const id = url.split("/").filter((elm) => !isNaN(elm) && elm > 0)[0];
+        if (contain(url, "activity")) {
+          return elementWithRightId(id, USER_ACTIVITY);
+        } else if (contain(url, "average-sessions")) {
+          return elementWithRightId(id, USER_AVERAGE_SESSIONS);
+        } else if (contain(url, "performance")) {
+          return elementWithRightId(id, USER_PERFORMANCE);
+        } else {
+          return elementWithRightId(id, USER_MAIN_DATA);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      return jsonOrThrowIfError(await axios.get(`${this.baseUrl}${url}`));
+    }
   }
 }
 
@@ -44,7 +78,7 @@ class ApiEntity {
 
 class Database {
   constructor() {
-    this.api = new Api({ baseUrl: "http://localhost:3000" });
+    this.api = new Api({ baseUrl: "http://localhost:3000", isMock: false });
   }
 
   user = (uid) => new ApiEntity({ key: "user", api: this.api, uid: uid });
