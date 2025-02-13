@@ -1,11 +1,6 @@
-// Style
 import "../../style/generalCSS.scss";
 import "../../style/composents/activity/ChartBar.scss";
-
-// Components
 import ChartBarLegend from "./ChartBarLegend";
-
-// Autre
 import {
   BarChart,
   Bar,

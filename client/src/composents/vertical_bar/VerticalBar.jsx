@@ -1,14 +1,9 @@
-// Style
 import "../../style/generalCSS.scss";
 import "../../style/composents/vertical_bar/VerticalBar.scss";
-
-// Data
 import meditation from "../../assets/icon-meditation.svg";
 import swim from "../../assets/icon-swim.svg";
 import bike from "../../assets/icon-bike.svg";
 import haltero from "../../assets/icon-haltero.svg";
-
-// Components
 import VerticalBarButton from "./VerticalBarButton";
 
 function VerticalBar() {

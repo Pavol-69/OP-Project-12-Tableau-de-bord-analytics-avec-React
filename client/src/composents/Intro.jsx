@@ -2,22 +2,7 @@
 import "../style/generalCSS.scss";
 import "../style/composents/Intro.scss";
 
-// Database
-import database from "../database/database";
-
-// Autre
-import { useState, useEffect } from "react";
-
-function Intro({ userId }) {
-  const [info, setInfo] = useState({});
-
-  useEffect(() => {
-    database
-      .user(userId)
-      .info()
-      .then((res) => setInfo(res));
-  }, [userId]);
-
+function Intro({ info }) {
   return info.id ? (
     <div className="intro_ctn ver">
       <h1>

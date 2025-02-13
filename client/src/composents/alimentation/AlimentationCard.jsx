@@ -1,4 +1,3 @@
-// Style
 import "../../style/generalCSS.scss";
 import "../../style/composents/alimentation/AlimentationCard.scss";
 

@@ -1,11 +1,6 @@
-// Style
 import "../../style/generalCSS.scss";
 import "../../style/composents/header/Header.scss";
-
-// Data
 import bigLogo from "../../assets/big-logo-sportsee.svg";
-
-// Components
 import HeaderButton from "./HeaderButton";
 
 function Header() {

@@ -1,12 +1,12 @@
-// Style
 import "../../style/generalCSS.scss";
 import "../../style/composents/Main.scss";
 import "../../style/composents/activity/CircularProgressBar.scss";
-
-// Autre
 import { PieChart, Pie, Cell } from "recharts";
 
 function CircularProgressBar({ todayScore }) {
+  // Pour réaliser la barre de progression circulaire, un PieChart en 2 parties a été utilisé
+  // => On transforme donc notre pourcentage en 2 valeurs
+  // => La seconde partie est de la même couleur que le fond pour ne pas apparaître
   const data = [
     { name: "Group B", value: todayScore },
     { name: "Group A", value: 100 - todayScore },

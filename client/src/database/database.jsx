@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   USER_MAIN_DATA,
   USER_ACTIVITY,
@@ -6,9 +5,11 @@ import {
   USER_PERFORMANCE,
 } from "./mock.js";
 
+// Gère la réponse de l'API
 const jsonOrThrowIfError = async (response) => {
-  if (!response.data) throw new Error(await response.message);
-  return response.data.data;
+  const parseRes = await response.json();
+  if (!parseRes.data) throw new Error(parseRes);
+  return parseRes.data;
 };
 
 function contain(url, elm) {
@@ -21,6 +22,8 @@ function elementWithRightId(id, array) {
   )[0];
 }
 
+// Va faire les calls API selon les données d'entrée
+// Va aussi simuler l'API où cas il n'y a pas de serveur, et que nos données sont mockées
 class Api {
   constructor({ baseUrl, isMock }) {
     this.baseUrl = baseUrl;
@@ -40,14 +43,22 @@ class Api {
           return elementWithRightId(id, USER_MAIN_DATA);
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     } else {
-      return jsonOrThrowIfError(await axios.get(`${this.baseUrl}${url}`));
+      return jsonOrThrowIfError(
+        await fetch(`${this.baseUrl}${url}`, {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+          },
+        })
+      );
     }
   }
 }
 
+// Crée les url adaptés à l'API pour les différents calls
 class ApiEntity {
   constructor({ key, api, uid }) {
     this.key = key;
@@ -76,6 +87,8 @@ class ApiEntity {
   }
 }
 
+// Class permettant de faire nos appels API
+// => Possibilité de switcher sur les données mockées
 class Database {
   constructor() {
     this.api = new Api({ baseUrl: "http://localhost:3000", isMock: false });

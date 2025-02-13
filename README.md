@@ -20,6 +20,7 @@ Ce repository contient tout le code source nécessaire pour faire tourner l'appl
 ## 2.1 Prérequis
 
 - [npm](https://www.npmjs.com/)
+  => Pour cette application, on va principalement utiliser Recharts (https://recharts.org/)
 
 ## 2.2 Lancer l'application
 
@@ -30,7 +31,7 @@ Ce repository contient tout le code source nécessaire pour faire tourner l'appl
 
 - L'application ne dispose pas d'interface de connexion pour se connecter selon un profil, mais il est possible de changer l'id de l'utilisateur dont on veut inspecter les données
 
-  => `./client/src/App.jsx` => ligne 17 => `setUserId()`
+  => `./client/src/App.jsx` => ligne 23 => `const userId = **`
 
 ## 3. Backend - Server (mock)
 
@@ -38,4 +39,4 @@ Ce repository contient tout le code source nécessaire pour faire tourner l'appl
 
   => Les appels API se font grâce au fichier `./client/src/database.database.jsx`
 
-        => Mettre la variable `isMock`, ligne 81, pour passer sur les données mockées
+        => Mettre la variable `isMock` à true, ligne 81, pour passer sur les données mockées

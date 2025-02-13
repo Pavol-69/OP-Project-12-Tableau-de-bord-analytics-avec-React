@@ -1,9 +1,6 @@
-// Style
 import "../../style/generalCSS.scss";
 import "../../style/composents/Main.scss";
 import "../../style/composents/activity/ChartSpider.scss";
-
-// Autre
 import { useEffect, useState } from "react";
 import {
   ResponsiveContainer,
@@ -47,6 +44,7 @@ function ChartLine({ data }) {
     return newArray;
   }
 
+  // Pour positionner correctement la légende
   function renderPolarAngleAxis({ payload, x, y, cx, cy, ...rest }) {
     return (
       <Text
