@@ -18,46 +18,30 @@ function App() {
   const [perf, setPerf] = useState({});
   const [todayScore, setTodayScore] = useState(0);
   const [info, setInfo] = useState({});
+  const userId = "12";
 
   useEffect(() => {
-    const userId = "12";
+    const fetchUserInfo = async () => {
+      try {
+        setInfo(await database.user(userId).info());
+        if (info.todayScore) {
+          setTodayScore(info.todayScore * 100);
+        } else if (info.score) {
+          setTodayScore(info.score * 100);
+        } else {
+          setTodayScore(0);
+        }
 
-    try {
-      database
-        .user(userId)
-        .info()
-        .then((res) => {
-          setInfo(res);
-          if (res.todayScore) {
-            setTodayScore(res.todayScore * 100);
-          } else if (res.score) {
-            setTodayScore(res.score * 100);
-          } else {
-            setTodayScore(0);
-          }
-        });
-      database
-        .user(userId)
-        .activity()
-        .then((res) => {
-          setActivity(res);
-        });
-      database
-        .user(userId)
-        .averageSession()
-        .then((res) => {
-          setAverageSession(res);
-        });
-      database
-        .user(userId)
-        .performance()
-        .then((res) => {
-          setPerf(res);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+        setActivity(await database.user(userId).activity());
+        setAverageSession(await database.user(userId).averageSession());
+        setPerf(await database.user(userId).performance());
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
+
+    fetchUserInfo();
+  }, [info.score, info.todayScore]);
 
   return (
     <>
