@@ -31,7 +31,7 @@ Ce repository contient tout le code source nécessaire pour faire tourner l'appl
 
 - L'application ne dispose pas d'interface de connexion pour se connecter selon un profil, mais il est possible de changer l'id de l'utilisateur dont on veut inspecter les données
 
-  => `./client/src/App.jsx` => ligne 23 => `const userId = **`
+  => `./client/src/App.jsx` => ligne 21 => `const userId = **`
 
 ## 3. Backend - Server (mock)
 
@@ -39,4 +39,4 @@ Ce repository contient tout le code source nécessaire pour faire tourner l'appl
 
   => Les appels API se font grâce au fichier `./client/src/database.database.jsx`
 
-        => Mettre la variable `isMock` à true, ligne 81, pour passer sur les données mockées
+        => Mettre la variable `isMocked` à true, ligne 9, pour passer sur les données mockées
