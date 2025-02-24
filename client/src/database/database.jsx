@@ -46,22 +46,36 @@ function elementWithRightId(id, array) {
   )[0];
 }
 
-// object database qui va réaliser tous nos call api selon ce qu'on lui demande
-const database = {
-  user: (id) => ({
-    info: async () => {
-      return await apiCall(id, "", isMocked);
-    },
-    activity: async () => {
-      return await apiCall(id, "activity", isMocked);
-    },
-    averageSession: async () => {
-      return await apiCall(id, "average-sessions", isMocked);
-    },
-    performance: async () => {
-      return await apiCall(id, "performance", isMocked);
-    },
-  }),
-};
+// Création d'une class en plus pour harmoniser les données, car les calls api peuvent retourner .todayScore ou .score, selon les utilisateurs
+// => On veut tout au même format
+class Info {
+  constructor(data) {
+    this.id = data.id;
+    this.userInfos = data.userInfos;
+    this.todayScore = data.todayScore
+      ? data.todayScore * 100
+      : data.score * 100;
+    this.keyData = data.keyData;
+  }
+}
 
-export default database;
+class User {
+  constructor(userId) {
+    this.userId = userId;
+  }
+
+  // Fait les différents call API séparemment du constructor dans une fonction async
+  async init() {
+    this.info = new Info(await apiCall(this.userId, "", isMocked));
+    this.activity = await apiCall(this.userId, "activity", isMocked);
+    this.averageSession = await apiCall(
+      this.userId,
+      "average-sessions",
+      isMocked
+    );
+    this.perf = await apiCall(this.userId, "performance", isMocked);
+    return this;
+  }
+}
+
+export default User;
