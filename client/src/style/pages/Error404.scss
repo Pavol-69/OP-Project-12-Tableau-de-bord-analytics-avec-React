@@ -1,0 +1,12 @@
+@use "../variables.scss" as *;
+
+.err_msg_ctn {
+  display: flex;
+  flex-direction: column;
+}
+
+.error404 {
+  font-size: 50px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}

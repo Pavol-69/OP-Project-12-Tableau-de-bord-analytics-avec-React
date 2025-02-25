@@ -33,3 +33,18 @@ h1 {
   /*Display*/
   flex-direction: row;
 }
+
+.main_ctn {
+  /*Position*/
+  position: relative;
+
+  /*Dimensions*/
+
+  margin: 91px 0px 0px 117px;
+  padding: 50px 100px;
+  box-sizing: border-box;
+
+  /*Display*/
+  display: flex;
+  gap: 80px;
+}

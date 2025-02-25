@@ -29,9 +29,9 @@ Ce repository contient tout le code source nécessaire pour faire tourner l'appl
 
 ## 2. Changer d'utilisateur
 
-- L'application ne dispose pas d'interface de connexion pour se connecter selon un profil, mais il est possible de changer l'id de l'utilisateur dont on veut inspecter les données
+- L'application ne dispose pas d'interface de connexion pour se connecter selon un profil, mais il est possible de changer l'id de l'utilisateur dont on veut inspecter les données simplement en changeant l'url
 
-  => `./client/src/App.jsx` => ligne 21 => `const userId = **`
+  => par exemple, `http://localhost:5173/user_page/18` va nous donner la page liée à l'utilisateur avec l'userId 18
 
 ## 3. Backend - Server (mock)
 
